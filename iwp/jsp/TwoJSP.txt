@@ -1,0 +1,63 @@
+
+//Form
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Input Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Enter a Number</h1>
+        <form action="process.jsp" method="post">
+            <input type="text" name="num1" id="num1">
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
+
+
+
+//Process.jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.io.IOException"%>
+<%
+    String numStr = request.getParameter("num1");
+    if (numStr != null) {
+        request.setAttribute("num1", numStr);
+        request.getRequestDispatcher("display.jsp").forward(request, response);
+    } else {
+        out.println("No input received. Please go back and enter a number.");
+    }
+%>
+
+
+
+
+//display.jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Display Page</title>
+    </head>
+    <body>
+        <h1>Display the Number</h1>
+        <%
+            String numStr = (String) request.getAttribute("num1");
+            if (numStr != null) {
+                try {
+                    int num = Integer.parseInt(numStr);
+                    out.print("The number entered is: " + num);
+                } catch (NumberFormatException e) {
+                    out.println("Invalid input. Please enter a valid number.");
+                }
+            } else {
+                out.println("No number to display.");
+            }
+        %>
+    </body>
+</html>
+
+

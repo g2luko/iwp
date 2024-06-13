@@ -1,0 +1,49 @@
+//form.jsp
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Form</title>
+</head>
+<body>
+    <h2>Enter Two Numbers</h2>
+    <form action="Outputform.jsp" method="post">
+        <label for="number1">Number 1:</label>
+        <input type="number" id="number1" name="number1" required>
+        <br><br>
+        <label for="number2">Number 2:</label>
+        <input type="number" id="number2" name="number2" required>
+        <br><br>
+        <input type="submit" value="Calculate Sum">
+    </form>
+</body>
+</html>
+
+
+//Outputform.jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sum Result</title>
+</head>
+<body>
+    <h2>Sum of the Two Numbers</h2>
+    <%
+        // Retrieve the form parameters
+        String num1Str = request.getParameter("number1");
+        String num2Str = request.getParameter("number2");
+
+        // Convert the parameters to integers
+        int num1 = Integer.parseInt(num1Str);
+        int num2 = Integer.parseInt(num2Str);
+
+        // Calculate the sum
+        int sum = num1 + num2;
+
+        // Display the result
+        out.println("<p>Number 1: " + num1 + "</p>");
+        out.println("<p>Number 2: " + num2 + "</p>");
+        out.println("<h3>Sum: " + sum + "</h3>");
+    %>
+</body>
+</html>
